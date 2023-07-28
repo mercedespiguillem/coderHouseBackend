@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "node": "^20.5.0"
+  },
+  "name": "desafios_coder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "C:/Users/merce/OneDrive/Documentos/CURSO BACKEND 2023/DESAFIOS_CODER/.git/"
+  },
+  "author": "Mercedes Piguillem",
+  "license": "ISC",
+  "description": ""
+}
