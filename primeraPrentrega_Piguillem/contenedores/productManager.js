@@ -10,7 +10,7 @@ class ProductManager {
 
   async getProducts() {
     const products = JSON.parse(await fs.readFile(this.path, "utf-8"));
-    // console.log(products);
+    console.log(products);
     return products;
   }
 
@@ -18,8 +18,9 @@ class ProductManager {
     const products = JSON.parse(await fs.readFile(this.path, "utf-8"));
     const product = products.find((prod) => prod.id === id);
     if (product) {
-      return(product)
       console.log(product);
+
+      return product;
     } else {
       console.log("Producto no encontrado");
     }

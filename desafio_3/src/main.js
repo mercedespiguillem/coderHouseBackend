@@ -1,5 +1,5 @@
-import ProductManager from "../desafio_2/productManager.js";
-import Product from "../desafio_2/product.js";
+import ProductManager from "../../desafio_2/productManager.js";
+import Product from "../../desafio_2/product.js";
 
 const managerTest = new ProductManager();
 const prod1 = new Product("Pantalon", "pantalon de jean", 1500, "picture", 50);
