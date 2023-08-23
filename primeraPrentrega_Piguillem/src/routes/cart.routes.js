@@ -29,20 +29,20 @@ cartRouter.post("/", async (req, res) => {
 cartRouter.post("/:cid/product/:pid", async (req, res) => {
   //ruta que agrega un producto(solo muestra id y quantity) segun su id, en el carrito x
 
-  const cartid = parseInt(req.params.cid);
-  const prodid = parseInt(req.params.pid);
+  const { cid } = parseInt(req.params.cid);
+  const { pid } = parseInt(req.params.pid);
 
-  const cart = cartAPI.getCartById(cartid);
+  const cart = cartAPI.getCartById(parseInt( cid ));
 
   if (!cart) {
     return res.status(404).json({ message: "Carrito no encontrado" });
   }
-  const prodx = cart.products.findIndex((prod) => prod.id === prodid);
+  const prodx = cart.products.findIndex((prod) => prod.id === (parseInt(pid)));
 
   if (prodx !== -1) {
     cart.products[prodx].quantity += 1;
   } else {
-    cart.products.push({ id: prodid, quantity: 1 });
+    cart.products.push({ id: (pid), quantity: 1 });
   }
 });
 

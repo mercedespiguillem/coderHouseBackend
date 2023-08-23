@@ -15,9 +15,13 @@ prodsRouter.get("/", async (req, res) => {
 
 //NO FUNCIONA, ME DICE SIEMPRE PROD NO ENCONTRADO
 prodsRouter.get("/:pid", async (req, res) => {
-  const { id } = req.params;
 
-  const prodById = await productsAPI.getProductById(parseInt({ id }));
+
+    const { pid } = req.params;
+  
+  
+  
+    const prodById = await productsAPI.getProductById(parseInt( pid ));
 
   if (prodById) {
     res.status(200).send(prodById);
@@ -40,17 +44,23 @@ prodsRouter.post("/", async (req, res) => {
 
 //NO ME RECONOCE EL ID QUE ENVIO EN LA RUTA Y SIEMPRE ME RESPONDE HA SIDO ACTUALIZADO
 prodsRouter.put("/:pid", async (req, res) => {
-  const param = req.params.id;
+  const { pid } = req.params;
   const property = req.body;
-  productsAPI.updateProduct(param, property);
-  res.json(`El producto con id ${param} ha sido actualizado`);
+  productsAPI.updateProduct(`${pid}`, property);
+  res.json(`El producto con id ${pid} ha sido actualizado`);
 });
 
 
 prodsRouter.delete("/:pid", async (req, res) => {
-  const param = req.params.id;
 
-  res.json(await productsAPI.deleteProduct(param));
+  const { pid } = req.params;
+
+
+
+  res.json(await productsAPI.deleteProduct(parseInt( pid )));
+
 });
+
+
 
 export default prodsRouter;
