@@ -1,5 +1,4 @@
 export default class Product {
-  //static #count = 1;//
 
   constructor(title, description, price, thumbnail, code, stock) {
     this.title = title;

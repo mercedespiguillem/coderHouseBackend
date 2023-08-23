@@ -4,8 +4,7 @@ import multer from "multer";
 import path from "path";
 
 import prodsRouter from "./routes/products.routes.js";
-//import cartRouter from "./routes/cart.routes.js";
-//import ProductManager from "../contenedores/productManager.js";
+import cartRouter from "./routes/cart.routes.js";
 
 const filepath = "./products.json";
 const PORT = 8080;
@@ -59,7 +58,7 @@ const storage = multer.diskStorage({
 // configuro la ruta de productos y carrito
 
 app.use("/api/products", prodsRouter);
-//app.use("/api/carts", cartRouter)
+app.use("/api/carts", cartRouter);
 
 console.log(__dirname);
 console.log(path.join(__dirname, "/public"));
