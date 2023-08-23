@@ -28,10 +28,10 @@ cartRouter.post("/", async (req, res) => {
 
 cartRouter.post("/:cid/product/:pid", async (req, res) => {
   //ruta que agrega un producto(solo muestra id y quantity) segun su id, en el carrito x
+
   const cartid = parseInt(req.params.cid);
   const prodid = parseInt(req.params.pid);
 
-  const carts = cartAPI.getAllcarts();
   const cart = cartAPI.getCartById(cartid);
 
   if (!cart) {
