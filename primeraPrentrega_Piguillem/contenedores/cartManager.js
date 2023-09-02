@@ -52,39 +52,52 @@ export default class CartsApi {
     let cartArray = await this.getAllcarts();
     const newCart = new Cart();
     this.carts.push(newCart);
-
+    
     try {
       await fs.promises.writeFile(
         this.file,
         JSON.stringify(cartArray, null, 2)
       );
-      return id;
+      return cartArray
     } catch (error) {
-      console.log("No se ha podido agregar el producto", error);
+      console.log("No se ha podido crear el carrito", error);
     }
   }
 
   async getCartById(id) {
-    const cartArray = await this.getAll();
+    const cartArray = await this.getAllcarts();
     const cart = cartArray.find((cartx) => cartx.id === id);
     if (cart) {
       console.log(cart);
       return cart.products;
     } else {
-      return console.log("El carrito no existe");
+      console.log("El carrito no existe");
+      return false 
     }
   }
 
   async addProductToCart(cid, pid) {
     let cart = await this.getCartById(cid);
     console.log(cart);
+    const prodIndex = cart.products.findIndex(prod => prod.id === pid)
 
-    if (!cart) {
-      throw new Error("Carrito no encontrado");
-    } else {
-      cart.products.push(pid);
-      console.log(cart);
-      return cart;
+        if (prodIndex != -1) {
+            cart.products[prodIndex].quantity += 1
+        } else {
+            cart.products.push({ id: pid, quantity: 1 })
+        }
+
+        //Guardarlo en JSON
+        try {
+      await fs.promises.writeFile(
+        this.file,
+        JSON.stringify(cart, null, 2)
+      );
+      return cart
+    } catch (error) {
+      console.log("No se ha podido crear el carrito", error);
     }
+
+
   }
 }

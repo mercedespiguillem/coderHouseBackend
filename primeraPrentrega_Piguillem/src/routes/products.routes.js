@@ -13,13 +13,8 @@ prodsRouter.get("/", async (req, res) => {
   res.status(200).send(productsFiltered);
 });
 
-//NO FUNCIONA, ME DICE SIEMPRE PROD NO ENCONTRADO
 prodsRouter.get("/:pid", async (req, res) => {
-
-
     const { pid } = req.params;
-  
-  
   
     const prodById = await productsAPI.getProductById(parseInt( pid ));
 
@@ -32,32 +27,37 @@ prodsRouter.get("/:pid", async (req, res) => {
 
 
 prodsRouter.post("/", async (req, res) => {
-  // funciona pero me falta autogenerar un id para el nuevo producto
   const newProd = await productsAPI.addProduct(req.body);
 
   res.json(newProd);
   const products = productsAPI.getProducts();
-
-  res.json(console.log("Nuevo producto agregado"));
+  if (newProd) {
+    res.status(200).send("Producto agregado correctamente")
+} else {
+    res.status(400).send("Error al agregar producto")
+}
   res.json(console.log(products));
 });
 
-//NO ME RECONOCE EL ID QUE ENVIO EN LA RUTA Y SIEMPRE ME RESPONDE HA SIDO ACTUALIZADO
 prodsRouter.put("/:pid", async (req, res) => {
-  const { pid } = req.params;
-  const property = req.body;
-  productsAPI.updateProduct(`${pid}`, property);
-  res.json(`El producto con id ${pid} ha sido actualizado`);
+  const prodUpdated = await productManager.updateProduct(parseInt(req.params.id), req.body)
+  if (prodUpdated) {
+    res.status(200).send("Producto actualizado correctamente")
+} else {
+    res.status(400).send("Error en actualizar producto")
+}
 });
 
 
 prodsRouter.delete("/:pid", async (req, res) => {
 
-  const { pid } = req.params;
+  const deleted = await productManager.deleteProduct(parseInt(req.params.id))
 
-
-
-  res.json(await productsAPI.deleteProduct(parseInt( pid )));
+  if (deleted) {
+      res.status(200).send("Producto eliminado correctamente")
+  } else {
+      res.status(400).send("Error al eliminar producto")
+  }
 
 });
 
