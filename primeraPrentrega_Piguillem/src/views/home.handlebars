@@ -1,0 +1,13 @@
+<h2>Lista de productos</h2>
+{{>cont/contador}}
+
+{{#if esTutor}}
+{{#each cursos}}
+<div>
+    <p>{{this.numCurso}} {{this.dia}} {{this.horario}}</p>
+</div>
+
+{{/each}}
+{{else}}
+<p>No sos tutor</p>
+{{/if}}
