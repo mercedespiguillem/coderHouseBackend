@@ -6,7 +6,7 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
     const datForm = new FormData(e.target) //Me genera un objeto iterador
     const prod = Object.fromEntries(datForm) //De un objeto iterable genero un objeto simple
-    socket.emit('nuevoProducto', prod)
+    socket.emit('newProduct', prod)
     e.target.reset()
 })
 
